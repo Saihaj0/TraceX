@@ -60,7 +60,7 @@ def _ensure_user_columns() -> None:
     # already exist: a fresh create_all builds them straight from the models.
     specs = (
         ("users", "is_admin",
-         "ALTER TABLE users ADD COLUMN is_admin BOOLEAN NOT NULL DEFAULT 0"),
+         "ALTER TABLE users ADD COLUMN is_admin BOOLEAN NOT NULL DEFAULT FALSE"),
         ("user_sessions", "client_ip",
          "ALTER TABLE user_sessions ADD COLUMN client_ip VARCHAR(45)"),
     )
@@ -78,9 +78,9 @@ def _ensure_user_columns() -> None:
             conn.execute(text(ddl))
         if any(t == "users" and c == "is_admin" for t, c, _ in pending):
             conn.execute(text(
-                "UPDATE users SET is_admin = 1 "
+                "UPDATE users SET is_admin = TRUE "
                 "WHERE id = (SELECT id FROM users ORDER BY created_at ASC LIMIT 1) "
-                "AND NOT EXISTS (SELECT 1 FROM users WHERE is_admin = 1)"))
+                "AND NOT EXISTS (SELECT 1 FROM users WHERE is_admin = TRUE)"))
 
 
 def init_db() -> None:

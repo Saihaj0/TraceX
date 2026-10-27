@@ -25,12 +25,12 @@ depends_on: Union[str, Sequence[str], None] = None
 def upgrade() -> None:
     op.add_column('users',
                   sa.Column('is_admin', sa.Boolean(), nullable=False,
-                            server_default='0'))
+                            server_default=sa.false()))
     # Backfill: earliest account administers an existing instance.
     op.execute(
-        "UPDATE users SET is_admin = 1 "
+        "UPDATE users SET is_admin = TRUE "
         "WHERE id = (SELECT id FROM users ORDER BY created_at ASC LIMIT 1) "
-        "AND NOT EXISTS (SELECT 1 FROM users WHERE is_admin = 1)"
+        "AND NOT EXISTS (SELECT 1 FROM users WHERE is_admin = TRUE)"
     )
 
 
