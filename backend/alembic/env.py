@@ -12,11 +12,12 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 
-from app.config import DATABASE_URL
+from app.config import DATABASE_URL as APP_DATABASE_URL
 from app.db import Base
 from app import models  # noqa: F401  (register every table on the metadata)
 
 config = context.config
+DATABASE_URL = config.get_main_option("sqlalchemy.url") or APP_DATABASE_URL
 config.set_main_option("sqlalchemy.url", DATABASE_URL.replace("%", "%%"))
 
 if config.config_file_name is not None:
