@@ -1,0 +1,15 @@
+# TRACE-X backend — runtime
+fastapi==0.143.3
+uvicorn==0.54.0
+SQLAlchemy==2.1.5
+pydantic==2.14.1
+python-multipart==0.0.32      # multipart uploads (evidence import)
+python-dateutil==2.9.0.post0  # tolerant timestamp parsing
+python-evtx==0.8.1            # Windows EVTX parsing (adapter: app/parsers/evtx.py)
+networkx>=3.0                 # graph correlation (suspicion chains, paths)
+alembic==1.20.0               # database migrations (PostgreSQL deployments)
+psycopg[binary]==3.3.6        # PostgreSQL driver (postgresql+psycopg:// URLs in app.config)
+
+# TRACE-X backend — tests
+pytest==9.1.1
+httpx==0.28.1                 # FastAPI TestClient transport

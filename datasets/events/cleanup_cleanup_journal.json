@@ -1,0 +1,194 @@
+{
+  "synthetic": true,
+  "scenario": "cleanup",
+  "note": "structured normalized events",
+  "timezone_note": "timestamps normalized to UTC (synthetic data uses explicit offsets)",
+  "ground_truth": {
+    "expected_rules": [
+      "AF-003",
+      "AF-005"
+    ],
+    "expected_chains": [],
+    "expected_absent": [
+      "AF-001",
+      "AF-002",
+      "AF-004",
+      "AF-006",
+      "AF-007",
+      "AF-008"
+    ],
+    "benign_alternatives": [
+      "Legitimate administrative cleanup (disk cleanup tool)",
+      "Scheduled maintenance"
+    ]
+  },
+  "rejected_row_preview": [],
+  "records": [
+    {
+      "event_id": "S2-PROC",
+      "timestamp": "2026-03-02T09:24:00Z",
+      "timestamp_raw": "2026-03-02T09:24:00Z",
+      "event_type": "process_creation",
+      "description": "process started: C:\\Windows\\System32\\cleanmgr.exe /sagerun:1",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "S2-PROC",
+      "process_name": "C:\\Windows\\System32\\cleanmgr.exe",
+      "process_id": 3312
+    },
+    {
+      "event_id": "S2-D00",
+      "timestamp": "2026-03-02T09:25:00Z",
+      "timestamp_raw": "2026-03-02T09:25:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\cache_0.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "usn88000",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\cache_0.tmp"
+    },
+    {
+      "event_id": "S2-D01",
+      "timestamp": "2026-03-02T09:29:00Z",
+      "timestamp_raw": "2026-03-02T09:29:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\cache_1.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "usn88001",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\cache_1.tmp"
+    },
+    {
+      "event_id": "S2-D02",
+      "timestamp": "2026-03-02T09:33:00Z",
+      "timestamp_raw": "2026-03-02T09:33:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\cache_2.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "usn88002",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\cache_2.tmp"
+    },
+    {
+      "event_id": "S2-D03",
+      "timestamp": "2026-03-02T09:37:00Z",
+      "timestamp_raw": "2026-03-02T09:37:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\cache_3.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "usn88003",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\cache_3.tmp"
+    },
+    {
+      "event_id": "S2-D04",
+      "timestamp": "2026-03-02T09:41:00Z",
+      "timestamp_raw": "2026-03-02T09:41:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\cache_4.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "usn88004",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\cache_4.tmp"
+    },
+    {
+      "event_id": "S2-D05",
+      "timestamp": "2026-03-02T09:45:00Z",
+      "timestamp_raw": "2026-03-02T09:45:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\cache_5.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "usn88005",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\cache_5.tmp"
+    },
+    {
+      "event_id": "S2-D06",
+      "timestamp": "2026-03-02T09:49:00Z",
+      "timestamp_raw": "2026-03-02T09:49:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\cache_6.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "usn88006",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\cache_6.tmp"
+    },
+    {
+      "event_id": "S2-D07",
+      "timestamp": "2026-03-02T09:53:00Z",
+      "timestamp_raw": "2026-03-02T09:53:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\cache_7.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "usn88007",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\cache_7.tmp"
+    },
+    {
+      "event_id": "S2-D08",
+      "timestamp": "2026-03-02T09:57:00Z",
+      "timestamp_raw": "2026-03-02T09:57:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\cache_8.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "usn88008",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\cache_8.tmp"
+    },
+    {
+      "event_id": "S2-D09",
+      "timestamp": "2026-03-02T10:01:00Z",
+      "timestamp_raw": "2026-03-02T10:01:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\cache_9.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "usn88009",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\cache_9.tmp"
+    },
+    {
+      "event_id": "S2-D10",
+      "timestamp": "2026-03-02T10:05:00Z",
+      "timestamp_raw": "2026-03-02T10:05:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\cache_10.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "usn88010",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\cache_10.tmp"
+    },
+    {
+      "event_id": "S2-D11",
+      "timestamp": "2026-03-02T10:09:00Z",
+      "timestamp_raw": "2026-03-02T10:09:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\cache_11.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "usn88011",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\cache_11.tmp"
+    },
+    {
+      "event_id": "S2-D12",
+      "timestamp": "2026-03-02T10:13:00Z",
+      "timestamp_raw": "2026-03-02T10:13:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\cache_12.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "usn88012",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\cache_12.tmp"
+    },
+    {
+      "event_id": "S2-D13",
+      "timestamp": "2026-03-02T10:17:00Z",
+      "timestamp_raw": "2026-03-02T10:17:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\cache_13.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "usn88013",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\cache_13.tmp"
+    }
+  ]
+}

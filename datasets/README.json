@@ -1,0 +1,267 @@
+{
+  "scenarios": [
+    {
+      "scenario": "normal",
+      "name": "Normal user activity",
+      "description": "Routine logons, document editing, browsing and file reads with no loss events.",
+      "expected_rules": [],
+      "expected_chains": [],
+      "expected_absent": [
+        "AF-001",
+        "AF-002",
+        "AF-003",
+        "AF-005",
+        "AF-008"
+      ],
+      "alternatives": [
+        "Scheduled maintenance",
+        "Legitimate administrative cleanup"
+      ],
+      "notes": "Baseline true-negative case: any rule firing here is a false positive.",
+      "files": [
+        "normal_activity.json"
+      ]
+    },
+    {
+      "scenario": "cleanup",
+      "name": "Legitimate administrative cleanup",
+      "description": "A scheduled disk-cleanup run deleting temp cache files (bulk deletions, benign).",
+      "expected_rules": [
+        "AF-003",
+        "AF-005"
+      ],
+      "expected_chains": [],
+      "expected_absent": [
+        "AF-001",
+        "AF-002",
+        "AF-004",
+        "AF-006",
+        "AF-007",
+        "AF-008"
+      ],
+      "alternatives": [
+        "Legitimate administrative cleanup (disk cleanup tool)",
+        "Scheduled maintenance"
+      ],
+      "notes": "Ground truth: the bulk-deletion (AF-003) and work-then-loss (AF-005) DETECTIONS are correct \u2014 targets are temp files and the named tool (cleanmgr.exe) is in the execution record, so the report must present them as high-volume but plausibly benign. Detection accuracy is scored on whether the rule fires, not on whether the activity is malicious.",
+      "files": [
+        "cleanup_journal.json"
+      ]
+    },
+    {
+      "scenario": "deletion",
+      "name": "Forensic artifact deletion",
+      "description": "USN journal records show deletion of an event log, a prefetch artifact and a sensitive document.",
+      "expected_rules": [
+        "AF-002"
+      ],
+      "expected_chains": [],
+      "expected_absent": [
+        "AF-001",
+        "AF-008"
+      ],
+      "alternatives": [
+        "Disk cleanup / uninstaller removing artifacts",
+        "Log retention policy deleting aged logs"
+      ],
+      "notes": "",
+      "files": [
+        "usn_journal_export.json"
+      ]
+    },
+    {
+      "scenario": "logclear",
+      "name": "Audit log clearing",
+      "description": "Security log clear (1102) after an interactive command shell execution.",
+      "expected_rules": [
+        "AF-001",
+        "AF-005",
+        "AF-008"
+      ],
+      "expected_chains": [
+        "B",
+        "D"
+      ],
+      "expected_absent": [
+        "AF-003",
+        "AF-004",
+        "AF-006",
+        "AF-007"
+      ],
+      "alternatives": [
+        "Approved retention policy run",
+        "Incident-response cleanup performed with consent",
+        "Ordinary administrative shell session followed by a retention task"
+      ],
+      "notes": "AF-008 fires at reduced severity: the preceding execution (cmd.exe) shares the user/host but is not a documented anti-forensic utility, so support stays low and the report must say a routine shell session explains the pair. AF-005 and pattern D match the same activity\u2192loss sequence.",
+      "files": [
+        "security_view.json"
+      ]
+    },
+    {
+      "scenario": "timestamps",
+      "name": "Timestamp inconsistency",
+      "description": "One record with modified < created, one with three identical metadata timestamps, and one normal record as a control.",
+      "expected_rules": [
+        "AF-004"
+      ],
+      "expected_chains": [],
+      "expected_absent": [
+        "AF-001",
+        "AF-002"
+      ],
+      "alternatives": [
+        "Backup/restore rewriting metadata",
+        "Copy/extract tool flattening timestamps",
+        "Timezone misinterpretation between tools"
+      ],
+      "notes": "The control record must NOT be flagged \u2014 demonstrates that not every unusual timestamp is treated as manipulation.",
+      "files": [
+        "mft_metadata_export.json"
+      ]
+    },
+    {
+      "scenario": "csvexport",
+      "name": "Filesystem CSV export (parser coverage)",
+      "description": "USN-style CSV export including one intentionally invalid row so rejected-record reporting is exercised end to end.",
+      "expected_rules": [],
+      "expected_chains": [],
+      "expected_absent": [
+        "AF-001",
+        "AF-002",
+        "AF-003"
+      ],
+      "alternatives": [
+        "Ordinary application file updates during patching"
+      ],
+      "notes": "The CSV bytes are generated and imported through the real CSV parser, so the rejection shown in the UI comes from the parser, not a pre-baked table.",
+      "files": [
+        "webroot_usn_export.csv"
+      ]
+    },
+    {
+      "scenario": "multi",
+      "name": "Multiple suspicious actions",
+      "description": "Encoded PowerShell \u2192 log access \u2192 copy candidate \u2192 eviction \u2192 log clear \u2192 metadata anomaly \u2192 removable media transfer.",
+      "expected_rules": [
+        "AF-001",
+        "AF-002",
+        "AF-004",
+        "AF-005",
+        "AF-007",
+        "AF-008"
+      ],
+      "expected_chains": [
+        "A",
+        "B",
+        "D",
+        "E"
+      ],
+      "expected_absent": [
+        "AF-006"
+      ],
+      "alternatives": [
+        "Approved log rotation invoked through the same utilities",
+        "Backup/sync tool copying then pruning files",
+        "Incident-response cleanup performed with consent"
+      ],
+      "notes": "",
+      "files": [
+        "security_view.json",
+        "usn_journal_SecondaryDisk.json"
+      ]
+    },
+    {
+      "scenario": "incomplete",
+      "name": "Incomplete evidence collection",
+      "description": "A 14h48m logging gap while non-log activity continues, plus records with missing timestamps and rejected rows.",
+      "expected_rules": [
+        "AF-006"
+      ],
+      "expected_chains": [],
+      "expected_absent": [
+        "AF-001",
+        "AF-003"
+      ],
+      "alternatives": [
+        "Evidence acquisition incomplete for the period",
+        "Logging disabled or expired by configuration",
+        "Host offline / user inactive (weaker here because other artifacts continue)"
+      ],
+      "notes": "Demonstrates: rejected rows are reported, undated records never get a fake time, and absence of log records is treated as missing coverage, not deletion.",
+      "files": [
+        "collector_export_partial.json"
+      ]
+    },
+    {
+      "scenario": "clock",
+      "name": "Clock drift and inconsistent timezones",
+      "description": "Mixed offsets (-05:30, +05:45, UTC), a recorded clock change and preserved raw source strings.",
+      "expected_rules": [
+        "AF-004"
+      ],
+      "expected_chains": [],
+      "expected_absent": [
+        "AF-001",
+        "AF-002"
+      ],
+      "alternatives": [
+        "Clock drift or timezone misconfiguration",
+        "Scheduled time synchronization (NTP/VM tools)"
+      ],
+      "notes": "Raw source timestamps are preserved next to the normalized UTC value.",
+      "files": [
+        "collector_export_multi_tz.json"
+      ]
+    },
+    {
+      "scenario": "unrelated",
+      "name": "Unrelated events occurring close together",
+      "description": "Four events within 15 seconds across two hosts and two users \u2014 high temporal overlap without any shared anchor.",
+      "expected_rules": [
+        "AF-001"
+      ],
+      "expected_chains": [],
+      "expected_absent": [
+        "AF-008",
+        "AF-005"
+      ],
+      "alternatives": [
+        "Coincidental timing between independent systems",
+        "Scheduled tasks firing on their own cadence"
+      ],
+      "notes": "True-positive for AF-001 (the clear IS recorded) but a negative for sequence inference: no chain and no POSSIBLY_CAUSAL edge may be produced, because the events share no user/host/file anchor.",
+      "files": [
+        "multi_host_export.json"
+      ]
+    },
+    {
+      "scenario": "mixed",
+      "name": "Mixed benign and suspicious sequences",
+      "description": "Routine work in the morning, then an anti-forensic utility run, log clear, prefetch deletion and a uniform-timestamp anomaly.",
+      "expected_rules": [
+        "AF-001",
+        "AF-002",
+        "AF-004",
+        "AF-005",
+        "AF-008"
+      ],
+      "expected_chains": [
+        "B",
+        "D"
+      ],
+      "expected_absent": [
+        "AF-006"
+      ],
+      "alternatives": [
+        "Approved log rotation invoked through the same utilities",
+        "Legitimate administrative cleanup",
+        "Scheduled maintenance"
+      ],
+      "notes": "",
+      "files": [
+        "mixed_export.json"
+      ]
+    }
+  ]
+}

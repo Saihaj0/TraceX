@@ -1,0 +1,135 @@
+{
+  "synthetic": true,
+  "scenario": "multi",
+  "note": "EVTX-derived normalised JSON export + device events",
+  "timezone_note": "timestamps normalized to UTC (synthetic data uses explicit offsets)",
+  "ground_truth": {
+    "expected_rules": [
+      "AF-001",
+      "AF-002",
+      "AF-004",
+      "AF-005",
+      "AF-007",
+      "AF-008"
+    ],
+    "expected_chains": [
+      "A",
+      "B",
+      "D",
+      "E"
+    ],
+    "expected_absent": [
+      "AF-006"
+    ],
+    "benign_alternatives": [
+      "Approved log rotation invoked through the same utilities",
+      "Backup/sync tool copying then pruning files",
+      "Incident-response cleanup performed with consent"
+    ]
+  },
+  "rejected_row_preview": [],
+  "records": [
+    {
+      "event_id": "S6-001",
+      "timestamp": "2026-03-02T09:00:00Z",
+      "timestamp_raw": "2026-03-02T09:00:00Z",
+      "event_type": "process_creation",
+      "description": "process started: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -enc SQBFAFgA",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "S6-001",
+      "process_name": "powershell.exe -enc SQBFAFgA",
+      "process_id": 6116
+    },
+    {
+      "event_id": "S6-002",
+      "timestamp": "2026-03-02T09:03:00Z",
+      "timestamp_raw": "2026-03-02T09:03:00Z",
+      "event_type": "file_access",
+      "description": "access to C:\\Windows\\System32\\winevt\\Logs\\Security.evtx",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "S6-002",
+      "file_path": "C:\\Windows\\System32\\winevt\\Logs\\Security.evtx"
+    },
+    {
+      "event_id": "S6-003",
+      "timestamp": "2026-03-02T09:04:00Z",
+      "timestamp_raw": "2026-03-02T09:04:00Z",
+      "event_type": "file_timestamps_equal",
+      "description": "file_timestamps_equal: C:\\Windows\\System32\\winevt\\Logs\\Security.evtx [created/modified/accessed identical \u2014 possible copy or archive extraction; needs corroboration, not proven]",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "S6-003",
+      "file_path": "C:\\Windows\\System32\\winevt\\Logs\\Security.evtx",
+      "note": "copy candidate / timestamp reset on the same target"
+    },
+    {
+      "event_id": "S6-004",
+      "timestamp": "2026-03-02T09:16:00Z",
+      "timestamp_raw": "2026-03-02T09:16:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Windows\\System32\\winevt\\Logs\\Security.evtx",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "S6-004",
+      "file_path": "C:\\Windows\\System32\\winevt\\Logs\\Security.evtx"
+    },
+    {
+      "event_id": "S6-005",
+      "timestamp": "2026-03-02T09:21:00Z",
+      "timestamp_raw": "2026-03-02T09:21:00Z",
+      "event_type": "audit_log_cleared",
+      "description": "Windows event 1102 from provider Microsoft-Windows-Eventlog audit/security log cleared initiated by svc_admin",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "1024502"
+    },
+    {
+      "event_id": "S6-006",
+      "timestamp": "2026-03-02T09:30:00Z",
+      "timestamp_raw": "2026-03-02T09:30:00Z",
+      "event_type": "file_metadata_suspect",
+      "description": "file_metadata_suspect: C:\\Windows\\System32\\winevt\\Logs\\Security.evtx [modified timestamp precedes created timestamp in the source record]",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "S6-006",
+      "file_path": "C:\\Windows\\System32\\winevt\\Logs\\Security.evtx"
+    },
+    {
+      "event_id": "S6-007",
+      "timestamp": "2026-03-02T10:00:00Z",
+      "timestamp_raw": "2026-03-02T10:00:00Z",
+      "event_type": "removable_device_connected",
+      "description": "USB mass storage device attached: USBDISK-01 (VID_0781 PID_5591)",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "S6-007",
+      "device_id": "USBDISK-01",
+      "file_path": null
+    },
+    {
+      "event_id": "S6-008",
+      "timestamp": "2026-03-02T10:06:00Z",
+      "timestamp_raw": "2026-03-02T10:06:00Z",
+      "event_type": "file_created",
+      "description": "file_created: E:\\backup\\evtx_export_all.evtx",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "S6-008",
+      "file_path": "E:\\backup\\evtx_export_all.evtx",
+      "device_id": "USBDISK-01"
+    },
+    {
+      "event_id": "S6-009",
+      "timestamp": "2026-03-02T10:30:00Z",
+      "timestamp_raw": "2026-03-02T10:30:00Z",
+      "event_type": "file_metadata_suspect",
+      "description": "file_metadata_suspect: C:\\Windows\\System32\\winevt\\Logs\\System.evtx [modified timestamp precedes created timestamp in the source record]",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "S6-009",
+      "file_path": "C:\\Windows\\System32\\winevt\\Logs\\System.evtx"
+    }
+  ]
+}

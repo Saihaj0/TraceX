@@ -1,0 +1,66 @@
+{
+  "synthetic": true,
+  "scenario": "unrelated",
+  "note": "merged export from two hosts",
+  "timezone_note": "timestamps normalized to UTC (synthetic data uses explicit offsets)",
+  "ground_truth": {
+    "expected_rules": [
+      "AF-001"
+    ],
+    "expected_chains": [],
+    "expected_absent": [
+      "AF-008",
+      "AF-005"
+    ],
+    "benign_alternatives": [
+      "Coincidental timing between independent systems",
+      "Scheduled tasks firing on their own cadence"
+    ]
+  },
+  "rejected_row_preview": [],
+  "records": [
+    {
+      "event_id": "S9-001",
+      "timestamp": "2026-03-02T09:00:01Z",
+      "timestamp_raw": "2026-03-02T09:00:01Z",
+      "event_type": "process_creation",
+      "description": "process started: C:\\Program Files\\Adobe\\Acrobat\\Acrobat.exe",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S9-001",
+      "process_name": "Acrobat.exe",
+      "process_id": 7001
+    },
+    {
+      "event_id": "S9-002",
+      "timestamp": "2026-03-02T09:00:04Z",
+      "timestamp_raw": "2026-03-02T09:00:04Z",
+      "event_type": "audit_log_cleared",
+      "description": "Windows event 1102 from provider Microsoft-Windows-Eventlog audit/security log cleared initiated by CORP\\bob",
+      "host": "SRV-CORP-02",
+      "user": "CORP\\bob",
+      "source_record_id": "44231"
+    },
+    {
+      "event_id": "S9-003",
+      "timestamp": "2026-03-02T09:00:09Z",
+      "timestamp_raw": "2026-03-02T09:00:09Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: D:\\shares\\public\\newsletter.pdf",
+      "host": "SRV-CORP-02",
+      "user": "CORP\\bob",
+      "source_record_id": "S9-003",
+      "file_path": "D:\\shares\\public\\newsletter.pdf"
+    },
+    {
+      "event_id": "S9-004",
+      "timestamp": "2026-03-02T09:00:15Z",
+      "timestamp_raw": "2026-03-02T09:00:15Z",
+      "event_type": "browser_visit",
+      "description": "Browser visit to https://news.example.com",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S9-004"
+    }
+  ]
+}

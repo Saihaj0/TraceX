@@ -1,0 +1,64 @@
+{
+  "synthetic": true,
+  "scenario": "logclear",
+  "note": "EVTX-derived normalised JSON export of the Security log",
+  "timezone_note": "timestamps normalized to UTC (synthetic data uses explicit offsets)",
+  "ground_truth": {
+    "expected_rules": [
+      "AF-001",
+      "AF-005",
+      "AF-008"
+    ],
+    "expected_chains": [
+      "B",
+      "D"
+    ],
+    "expected_absent": [
+      "AF-003",
+      "AF-004",
+      "AF-006",
+      "AF-007"
+    ],
+    "benign_alternatives": [
+      "Approved retention policy run",
+      "Incident-response cleanup performed with consent",
+      "Ordinary administrative shell session followed by a retention task"
+    ]
+  },
+  "rejected_row_preview": [],
+  "records": [
+    {
+      "event_id": "S4-100",
+      "timestamp": "2026-03-02T09:00:00Z",
+      "timestamp_raw": "2026-03-02T09:00:00Z",
+      "event_type": "process_creation",
+      "description": "process started: C:\\Windows\\System32\\cmd.exe",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "S4-100",
+      "process_name": "C:\\Windows\\System32\\cmd.exe",
+      "process_id": 9012
+    },
+    {
+      "event_id": "S4-1102",
+      "timestamp": "2026-03-02T09:04:00Z",
+      "timestamp_raw": "2026-03-02T09:04:00Z",
+      "event_type": "audit_log_cleared",
+      "description": "Windows event 1102 from provider Microsoft-Windows-Eventlog audit/security log cleared initiated by svc_admin",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "1024417"
+    },
+    {
+      "event_id": "S4-7045",
+      "timestamp": "2026-03-02T09:09:00Z",
+      "timestamp_raw": "2026-03-02T09:09:00Z",
+      "event_type": "service_installed",
+      "description": "New service installed: BackupSync",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "S4-7045",
+      "process_name": "C:\\Windows\\System32\\svchost.exe"
+    }
+  ]
+}

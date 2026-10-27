@@ -1,0 +1,134 @@
+{
+  "synthetic": true,
+  "scenario": "incomplete",
+  "note": "partial collector export",
+  "timezone_note": "timestamps normalized to UTC (synthetic data uses explicit offsets)",
+  "ground_truth": {
+    "expected_rules": [
+      "AF-006"
+    ],
+    "expected_chains": [],
+    "expected_absent": [
+      "AF-001",
+      "AF-003"
+    ],
+    "benign_alternatives": [
+      "Evidence acquisition incomplete for the period",
+      "Logging disabled or expired by configuration",
+      "Host offline / user inactive (weaker here because other artifacts continue)"
+    ]
+  },
+  "rejected_row_preview": [
+    {
+      "row_index": 6,
+      "record_id": "S7-BAD-TS",
+      "reason": "unparsable_timestamp",
+      "detail": "cannot interpret 'not-a-timestamp' as a date/time",
+      "raw_excerpt": "{\"timestamp\": \"not-a-timestamp\", \"event_type\": \"file_access\"}"
+    },
+    {
+      "row_index": 9,
+      "record_id": "S7-EMPTY",
+      "reason": "empty_row",
+      "detail": "row contains no values",
+      "raw_excerpt": "{}"
+    }
+  ],
+  "records": [
+    {
+      "event_id": "S7-001",
+      "timestamp": "2026-03-02T09:00:00Z",
+      "timestamp_raw": "2026-03-02T09:00:00Z",
+      "event_type": "logon_success",
+      "description": "Interactive logon for CORP\\alice",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S7-001",
+      "process_name": "lsass.exe"
+    },
+    {
+      "event_id": "S7-002",
+      "timestamp": "2026-03-02T09:05:00Z",
+      "timestamp_raw": "2026-03-02T09:05:00Z",
+      "event_type": "file_modified",
+      "description": "file_modified: C:\\Users\\alice\\Documents\\Travel_itinerary.pdf",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S7-002",
+      "file_path": "C:\\Users\\alice\\Documents\\Travel_itinerary.pdf"
+    },
+    {
+      "event_id": "S7-010",
+      "timestamp": "2026-03-02T09:12:00Z",
+      "timestamp_raw": "2026-03-02T09:12:00Z",
+      "event_type": "logon_success",
+      "description": "Interactive logon for CORP\\alice (second session)",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S7-010"
+    },
+    {
+      "event_id": "S7-020",
+      "timestamp": "2026-03-02T22:25:00Z",
+      "timestamp_raw": "2026-03-02T22:25:00Z",
+      "event_type": "file_access",
+      "description": "access to C:\\Users\\alice\\Documents\\Travel_itinerary.pdf",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S7-020",
+      "file_path": "C:\\Users\\alice\\Documents\\Travel_itinerary.pdf"
+    },
+    {
+      "event_id": "S7-021",
+      "timestamp": "2026-03-02T22:30:00Z",
+      "timestamp_raw": "2026-03-02T22:30:00Z",
+      "event_type": "process_creation",
+      "description": "process started: C:\\Program Files\\7-Zip\\7zFM.exe",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S7-021",
+      "process_name": "7zFM.exe",
+      "process_id": 5120
+    },
+    {
+      "event_id": "S7-022",
+      "timestamp": "2026-03-02T22:40:00Z",
+      "timestamp_raw": "2026-03-02T22:40:00Z",
+      "event_type": "file_created",
+      "description": "file_created: D:\\exports\\Travel_itinerary_archive.zip",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S7-022",
+      "file_path": "D:\\exports\\Travel_itinerary_archive.zip"
+    },
+    {
+      "event_id": "S7-099",
+      "timestamp": null,
+      "timestamp_raw": null,
+      "event_type": "unknown",
+      "description": "event type recorded without a timestamp in the source",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S7-099"
+    },
+    {
+      "event_id": "S7-100",
+      "timestamp": "2026-03-03T00:00:00Z",
+      "timestamp_raw": "2026-03-03T00:00:00Z",
+      "event_type": "logon_success",
+      "description": "Interactive logon for CORP\\alice",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S7-100"
+    },
+    {
+      "timestamp": "not-a-timestamp",
+      "event_type": "file_access",
+      "description": "row with an unparsable timestamp",
+      "source_record_id": "S7-BAD-TS",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice"
+    },
+    {}
+  ]
+}

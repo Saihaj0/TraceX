@@ -1,0 +1,106 @@
+{
+  "synthetic": true,
+  "scenario": "mixed",
+  "note": "activity + security collector export",
+  "timezone_note": "timestamps normalized to UTC (synthetic data uses explicit offsets)",
+  "ground_truth": {
+    "expected_rules": [
+      "AF-001",
+      "AF-002",
+      "AF-004",
+      "AF-005",
+      "AF-008"
+    ],
+    "expected_chains": [
+      "B",
+      "D"
+    ],
+    "expected_absent": [
+      "AF-006"
+    ],
+    "benign_alternatives": [
+      "Approved log rotation invoked through the same utilities",
+      "Legitimate administrative cleanup",
+      "Scheduled maintenance"
+    ]
+  },
+  "rejected_row_preview": [],
+  "records": [
+    {
+      "event_id": "S10-001",
+      "timestamp": "2026-03-02T09:00:00Z",
+      "timestamp_raw": "2026-03-02T09:00:00Z",
+      "event_type": "logon_success",
+      "description": "Interactive logon for CORP\\alice",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S10-001"
+    },
+    {
+      "event_id": "S10-002",
+      "timestamp": "2026-03-02T09:04:00Z",
+      "timestamp_raw": "2026-03-02T09:04:00Z",
+      "event_type": "file_created",
+      "description": "file_created: C:\\Users\\alice\\Documents\\Draft_email.docx",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S10-002",
+      "file_path": "C:\\Users\\alice\\Documents\\Draft_email.docx"
+    },
+    {
+      "event_id": "S10-003",
+      "timestamp": "2026-03-02T09:20:00Z",
+      "timestamp_raw": "2026-03-02T09:20:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Users\\alice\\AppData\\Local\\Temp\\draft.tmp",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S10-003",
+      "file_path": "C:\\Users\\alice\\AppData\\Local\\Temp\\draft.tmp"
+    },
+    {
+      "event_id": "S10-101",
+      "timestamp": "2026-03-02T15:00:00Z",
+      "timestamp_raw": "2026-03-02T15:00:00Z",
+      "event_type": "process_creation",
+      "description": "process started: C:\\Windows\\System32\\wevtutil.exe cl Security",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "S10-101",
+      "process_name": "wevtutil.exe cl Security",
+      "process_id": 7404
+    },
+    {
+      "event_id": "S10-102",
+      "timestamp": "2026-03-02T15:02:00Z",
+      "timestamp_raw": "2026-03-02T15:02:00Z",
+      "event_type": "audit_log_cleared",
+      "description": "Windows event 1102 from provider Microsoft-Windows-Eventlog audit/security log cleared initiated by svc_admin",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "1026781"
+    },
+    {
+      "event_id": "S10-103",
+      "timestamp": "2026-03-02T15:08:00Z",
+      "timestamp_raw": "2026-03-02T15:08:00Z",
+      "event_type": "file_deleted",
+      "description": "file_deleted: C:\\Windows\\Prefetch\\WEVTUTIL.EXE-7A2B3C1D.pf",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "S10-103",
+      "file_path": "C:\\Windows\\Prefetch\\WEVTUTIL.EXE-7A2B3C1D.pf"
+    },
+    {
+      "event_id": "S10-104",
+      "timestamp": "2026-03-02T15:26:00Z",
+      "timestamp_raw": "2026-03-02T15:26:00Z",
+      "event_type": "file_timestamps_equal",
+      "description": "file_timestamps_equal: C:\\Windows\\Prefetch\\WEVTUTIL.EXE-7A2B3C1D.pf [created/modified/accessed timestamps are identical \u2014 possible copy or archive extraction; needs corroboration, not proven]",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "S10-104",
+      "file_path": "C:\\Windows\\Prefetch\\WEVTUTIL.EXE-7A2B3C1D.pf"
+    }
+  ]
+}

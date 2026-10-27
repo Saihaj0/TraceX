@@ -1,0 +1,55 @@
+{
+  "synthetic": true,
+  "scenario": "timestamps",
+  "note": "$MFT-style metadata export (JSON)",
+  "timezone_note": "timestamps normalized to UTC (synthetic data uses explicit offsets)",
+  "ground_truth": {
+    "expected_rules": [
+      "AF-004"
+    ],
+    "expected_chains": [],
+    "expected_absent": [
+      "AF-001",
+      "AF-002"
+    ],
+    "benign_alternatives": [
+      "Backup/restore rewriting metadata",
+      "Copy/extract tool flattening timestamps",
+      "Timezone misinterpretation between tools"
+    ]
+  },
+  "rejected_row_preview": [],
+  "records": [
+    {
+      "path": "C:\\Users\\alice\\Documents\\Merger_Notes.docx",
+      "size": 98304,
+      "ctime": "2026-03-02T11:00:00Z",
+      "mtime": "2026-03-01T22:14:00Z",
+      "atime": "2026-03-01T22:14:00Z",
+      "record_type": "$MFT",
+      "record_id": "mft-4471",
+      "file_id": "0x50000000001c"
+    },
+    {
+      "path": "C:\\Windows\\System32\\winevt\\Logs\\System.evtx",
+      "size": 1048576,
+      "ctime": "2026-03-02T10:30:00Z",
+      "mtime": "2026-03-02T10:30:00Z",
+      "atime": "2026-03-02T10:30:00Z",
+      "record_type": "$MFT",
+      "record_id": "mft-991",
+      "file_id": "0x600000000021"
+    },
+    {
+      "path": "C:\\Users\\alice\\Downloads\\installer.msi",
+      "size": 5242880,
+      "ctime": "2026-02-27T08:15:00Z",
+      "mtime": "2026-03-02T12:45:00Z",
+      "atime": "2026-03-02T12:47:00Z",
+      "record_type": "$MFT",
+      "record_id": "mft-1204",
+      "reason": "DATA_OVERWRITE",
+      "usn": 66012
+    }
+  ]
+}

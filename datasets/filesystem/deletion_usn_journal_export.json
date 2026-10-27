@@ -1,0 +1,62 @@
+{
+  "synthetic": true,
+  "scenario": "deletion",
+  "note": "USN journal-style filesystem export (JSON)",
+  "timezone_note": "timestamps normalized to UTC (synthetic data uses explicit offsets)",
+  "ground_truth": {
+    "expected_rules": [
+      "AF-002"
+    ],
+    "expected_chains": [],
+    "expected_absent": [
+      "AF-001",
+      "AF-008"
+    ],
+    "benign_alternatives": [
+      "Disk cleanup / uninstaller removing artifacts",
+      "Log retention policy deleting aged logs"
+    ]
+  },
+  "rejected_row_preview": [],
+  "records": [
+    {
+      "path": "C:\\Windows\\System32\\winevt\\Logs\\Security.evtx",
+      "size": 20971520,
+      "created": 1769850000000,
+      "modified": 1772463600000,
+      "accessed": 1772463600000,
+      "deleted": "true",
+      "usn": 90211,
+      "reason": "FILE_DELETE",
+      "file_id": "0x1800000000215",
+      "record_type": "usn_journal",
+      "record_id": "usn-90211"
+    },
+    {
+      "path": "C:\\Windows\\Prefetch\\WEVTUTIL.EXE-7A2B3C1D.pf",
+      "size": 8432,
+      "created": 1772269200000,
+      "modified": 1772463780000,
+      "accessed": 1772463600000,
+      "deleted": "true",
+      "usn": 90215,
+      "reason": "FILE_DELETE",
+      "file_id": "0x300000000011a",
+      "record_type": "usn_journal",
+      "record_id": "usn-90215"
+    },
+    {
+      "path": "C:\\Users\\alice\\Documents\\Budget_FY26.xlsx",
+      "size": 245760,
+      "created": 1772010000000,
+      "modified": 1772460000000,
+      "accessed": 1772460000000,
+      "deleted": "true",
+      "usn": 90220,
+      "reason": "FILE_DELETE",
+      "file_id": "0x40000000011b",
+      "record_type": "usn_journal",
+      "record_id": "usn-90220"
+    }
+  ]
+}

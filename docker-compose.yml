@@ -1,0 +1,64 @@
+# TRACE-X — full stack: PostgreSQL 18 + FastAPI backend + React frontend.
+#
+#   docker compose up --build
+#
+# Frontend: http://localhost:5173   Backend: http://localhost:8000/api/health
+#
+# Data survives restarts via named volumes (postgres data, backend evidence).
+# Set POSTGRES_PASSWORD in a .env next to this file (see .env.example).
+
+services:
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-tracex}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-tracex}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-tracex} -d ${POSTGRES_DB:-tracex}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: ${POSTGRES_USER:-tracex}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-tracex}
+      TRACEX_ENV: ${TRACEX_ENV:-development}
+      # Optional auth: set TRACEX_AUTH_ENABLED=true + TRACEX_API_KEYS="name:token,..."
+      TRACEX_AUTH_ENABLED: ${TRACEX_AUTH_ENABLED:-false}
+      TRACEX_API_KEYS: ${TRACEX_API_KEYS:-}
+    volumes:
+      - evidence:/app/data
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request;urllib.request.urlopen('http://127.0.0.1:8000/api/health')\""]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+      start_period: 20s
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  evidence:

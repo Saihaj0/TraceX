@@ -1,0 +1,78 @@
+{
+  "synthetic": true,
+  "scenario": "clock",
+  "note": "collector export with mixed source offsets",
+  "timezone_note": "timestamps normalized to UTC (synthetic data uses explicit offsets)",
+  "ground_truth": {
+    "expected_rules": [
+      "AF-004"
+    ],
+    "expected_chains": [],
+    "expected_absent": [
+      "AF-001",
+      "AF-002"
+    ],
+    "benign_alternatives": [
+      "Clock drift or timezone misconfiguration",
+      "Scheduled time synchronization (NTP/VM tools)"
+    ]
+  },
+  "rejected_row_preview": [],
+  "records": [
+    {
+      "event_id": "S8-001",
+      "timestamp": "2026-03-02T03:30:00Z",
+      "timestamp_raw": "2026-03-01T22:00:00-05:30",
+      "event_type": "file_modified",
+      "description": "file_modified: C:\\Users\\alice\\Documents\\Server_notes.txt",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S8-001",
+      "file_path": "C:\\Users\\alice\\Documents\\Server_notes.txt",
+      "timezone_note": "source offset -05:30 preserved; normalized to UTC"
+    },
+    {
+      "event_id": "S8-002",
+      "timestamp": "2026-03-02T05:00:00Z",
+      "timestamp_raw": "2026-03-02T03:00:00+00:00",
+      "event_type": "logon_success",
+      "description": "Interactive logon for CORP\\bob",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\bob",
+      "source_record_id": "S8-002"
+    },
+    {
+      "event_id": "S8-4616",
+      "timestamp": "2026-03-02T07:00:00Z",
+      "timestamp_raw": "2026-03-02T09:00:00+00:00",
+      "event_type": "system_time_changed",
+      "description": "System time changed: new system time 2026-03-02T07:00:00.000000000Z after adjustment of +7200s",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\svc_admin",
+      "source_record_id": "771201",
+      "timezone_note": "clock change recorded; ordering across this boundary is uncertain"
+    },
+    {
+      "event_id": "S8-003",
+      "timestamp": "2026-03-02T08:00:00Z",
+      "timestamp_raw": "2026-03-02T05:00:00+00:00",
+      "event_type": "file_modified",
+      "description": "file_modified: C:\\Users\\bob\\Desktop\\agenda.txt",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\bob",
+      "source_record_id": "S8-003",
+      "file_path": "C:\\Users\\bob\\Desktop\\agenda.txt"
+    },
+    {
+      "event_id": "S8-004",
+      "timestamp": "2026-03-02T09:00:00Z",
+      "timestamp_raw": "2026-03-02T11:30:00+05:45",
+      "event_type": "file_access",
+      "description": "access to C:\\Users\\alice\\Documents\\Server_notes.txt",
+      "host": "WS-FORENSIC-01",
+      "user": "CORP\\alice",
+      "source_record_id": "S8-004",
+      "file_path": "C:\\Users\\alice\\Documents\\Server_notes.txt"
+    }
+  ]
+}

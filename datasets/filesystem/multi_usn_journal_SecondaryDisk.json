@@ -1,0 +1,56 @@
+{
+  "synthetic": true,
+  "scenario": "multi",
+  "note": "USN journal export for the same host",
+  "timezone_note": "timestamps normalized to UTC (synthetic data uses explicit offsets)",
+  "ground_truth": {
+    "expected_rules": [
+      "AF-001",
+      "AF-002",
+      "AF-004",
+      "AF-005",
+      "AF-007",
+      "AF-008"
+    ],
+    "expected_chains": [
+      "A",
+      "B",
+      "D",
+      "E"
+    ],
+    "expected_absent": [
+      "AF-006"
+    ],
+    "benign_alternatives": [
+      "Approved log rotation invoked through the same utilities",
+      "Backup/sync tool copying then pruning files",
+      "Incident-response cleanup performed with consent"
+    ]
+  },
+  "rejected_row_preview": [],
+  "records": [
+    {
+      "path": "C:\\Windows\\System32\\winevt\\Logs\\Security.evtx",
+      "ctime": "2026-01-04T00:00:00Z",
+      "mtime": "2026-03-02T09:40:00Z",
+      "atime": "2026-03-02T09:40:00Z",
+      "deleted": "true",
+      "usn": 91500,
+      "reason": "FILE_DELETE",
+      "record_type": "usn_journal",
+      "record_id": "usn-91500",
+      "size": "20971520"
+    },
+    {
+      "path": "C:\\Windows\\System32\\winevt\\Logs\\System.evtx",
+      "ctime": "2026-01-04T00:00:00Z",
+      "mtime": "133848900000000000",
+      "atime": "133848900000000000",
+      "usn": 91510,
+      "reason": "DATA_OVERWRITE",
+      "record_type": "usn_journal",
+      "record_id": "usn-91510",
+      "size": "1048576"
+    }
+  ]
+}
